@@ -33,4 +33,6 @@ if uploaded_mp4_file is not None:
 		# print(download_video_bytes)
 
 	transcription = model.transcribe(mp4_file_path, language = 'en')
+	
+	st.write(transcription['text'])	
 	st.write("Done with transcription!")
