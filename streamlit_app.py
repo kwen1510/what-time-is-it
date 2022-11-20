@@ -83,13 +83,15 @@ with st.form("my_form"):
 		    # get the correct mp3 'stream'
 		    stream = yt.streams.get_by_itag(itag)
 		    # downloading the audio
-		    stream.download(output_path=save_path, filename=f"{row['videoId']}.mp3")
+		    stream.download(output_path=save_path, filename=f"{row['title']}.mp3")
 
-		    video_path_array.append(f"{save_path}/{row['videoId']}.mp3")
+		    video_path_array.append(f"{save_path}/{row['title']}.mp3")
 
 
 		st.write("All mp3 files extracted")
 
 		for mp3_path in video_path_array:
+			st.write(f"Extracting from {mp3_path.split("/")[-1]}")
 			transcription = model.transcribe(mp3_path, language = 'en')
 			st.write(transcription['text'])
+			st.write("")
