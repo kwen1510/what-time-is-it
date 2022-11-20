@@ -20,7 +20,7 @@ if uploaded_mp4_file is not None:
 	
 	st.write("Transcribing...")
 	
-	with NamedTemporaryFile(suffix="mp4") as temp:
+	with NamedTemporaryFile(suffix="mp3") as temp:
 		temp.write(uploaded_mp4_file.getvalue())
 		temp.seek(0)
 		result = model.transcribe(temp.name)
