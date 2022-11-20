@@ -2,6 +2,7 @@ import streamlit as st
 import pathlib
 from pathlib import Path
 import whisper
+import ffmpeg
 
 HERE = Path(__file__).parent
 print(HERE)
