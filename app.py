@@ -15,12 +15,10 @@ uploaded_mp4_file = st.file_uploader("Upload Video File", accept_multiple_files=
 
 model = whisper.load_model("base")
 
-print("hello world")
-
 # When mp4 file uploaded
 if uploaded_mp4_file is not None:
 	with NamedTemporaryFile(suffix="mp4") as temp:
-		temp.write(audio.getvalue())
+		temp.write(uploaded_mp4_file.getvalue())
 		temp.seek(0)
 		result = model.transcribe(temp.name)
 		st.write(result["text"])
