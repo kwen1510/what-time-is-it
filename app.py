@@ -51,7 +51,7 @@ if uploaded_mp4_file is not None:
 		
 		st.write(mp4_file_path)
 		
-		mp4tomp3(mp4_file_path,"audio.mp3")
+		mp4tomp3(str(mp4_file_path),"audio.mp3")
 
 	transcription = model.transcribe("audio.mp3", language = 'en')
 
