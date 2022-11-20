@@ -4,7 +4,16 @@ from pytube.exceptions import RegexMatchError
 from tqdm.auto import tqdm  # !pip install tqdm
 import whisper
 import math
+import whisper
+import ffmpeg
+import subprocess
+import base64
 
+# Load whisper model
+model = whisper.load_model("base")
+
+
+# Streamlit stuff goes here
 st.title("What time is it?")
 
 with st.form("my_form"):
@@ -74,3 +83,9 @@ with st.form("my_form"):
 		    stream = yt.streams.get_by_itag(itag)
 		    # downloading the audio
 		    stream.download(output_path=save_path, filename=f"{row['videoId']}.mp3")
+
+
+		    st.write("All mp3 files extracted")
+
+		    transcription = model.transcribe("fv3G8iY6e3c.mp3", language = 'en')
+
