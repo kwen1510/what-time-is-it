@@ -30,7 +30,7 @@ if uploaded_mp4_file is not None:
 		
 		st.write(mp4_file_path)
 
-	transcription = model.transcribe(audio=mp4_file_path, language = 'en')
+	transcription = model.transcribe(mp4_file_path, language = 'en')
 
 	st.write(transcription['text'])	
 	st.write("Done with transcription!")
