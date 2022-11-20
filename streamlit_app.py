@@ -12,7 +12,6 @@ import base64
 # Load whisper model
 model = whisper.load_model("base")
 
-
 # Streamlit stuff goes here
 st.title("What time is it?")
 
@@ -23,6 +22,8 @@ with st.form("my_form"):
 	submitted = st.form_submit_button("Submit")
 
 	if submitted:
+
+		video_path_array = []
 
 		st.write("Extracting YouTube playlist")
 
@@ -68,7 +69,7 @@ with st.form("my_form"):
 		    files = yt.streams.filter(only_audio=True)
 		    for file in files:
 
-		        print(file.mime_type)
+		        # print(file.mime_type)
 
 		        # and of those audio files we grab the first audio for mp4 (eg mp3)
 		        if file.mime_type == 'audio/mp4':
@@ -84,8 +85,11 @@ with st.form("my_form"):
 		    # downloading the audio
 		    stream.download(output_path=save_path, filename=f"{row['videoId']}.mp3")
 
+		    video_path_array.append(f"{save_path}/{row['videoId']}.mp3")
 
-		    st.write("All mp3 files extracted")
 
-		    transcription = model.transcribe("./mp3/fv3G8iY6e3c.mp3", language = 'en')
+		st.write("All mp3 files extracted")
 
+		for mp3_path in video_path_array:
+			transcription = model.transcribe(mp3_path, language = 'en')
+			st.write(transcription['text'])
