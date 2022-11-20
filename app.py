@@ -1,10 +1,8 @@
-from audiorecorder import audiorecorder
 import whisper
 import pathlib
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 import streamlit as st
-import whisper
 import ffmpeg
 
 HERE = Path(__file__).parent
