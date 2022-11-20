@@ -9,7 +9,7 @@ print(HERE)
 
 st.title("What Time is it?")
 
-uploaded_mp4_file = st.file_uploader("Upload Video File", accept_multiple_files=True)
+uploaded_mp4_file = st.file_uploader("Upload Video File", accept_multiple_files=False)
 
 model_size = 'tiny'
 
