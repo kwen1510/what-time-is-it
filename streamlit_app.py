@@ -8,6 +8,8 @@ import whisper
 import ffmpeg
 import subprocess
 import base64
+import os
+import json
 
 # Load whisper model
 model = whisper.load_model("base")
@@ -112,6 +114,9 @@ with st.form("my_form"):
 		# where to save
 		save_path = "./mp3"
 
+
+		# Extract all files in playlist as mp3
+
 		for i, row in enumerate(reconstructedMeta):
 		    # url of video to be downloaded
 		    url = row['url']
@@ -149,8 +154,30 @@ with st.form("my_form"):
 
 		st.write("All mp3 files extracted")
 
+
+		# Transcribe all with Whisper
+
+		# Initialise empty dictionary
+		transcribed_json = {}
+
 		for mp3_path in video_path_array:
 			st.write(f"Extracting from < {mp3_path.split('/')[-1]} >")
-			outputs = whisper_to_text(mp3_path)
+			segments_array = whisper_to_text(mp3_path)
 			st.write(outputs)
 			st.write("")
+
+			transcribed_json[mp3_path[:-4]] = segments_array
+
+		with open('transcribed.json', 'w', encoding ='utf8') as json_file:
+			json.dump(transcribed_json, json_file, ensure_ascii = False)
+
+		print("All mp3 files transcribed and saved as json!")
+
+
+		# Opening saved JSON file
+		f = open('transcribed.json')
+		  
+		# returns JSON object as 
+		# a dictionary
+		transcribed_texts = json.load(f)
+		st.write(transcribed_texts)
