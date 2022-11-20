@@ -49,7 +49,7 @@ if uploaded_mp4_file is not None:
 		video_bytes = uploaded_mp4_file.getvalue()
 		binary_file.write(video_bytes)
 		
-		st.write(mp4_file_path)
+# 		st.write(mp4_file_path)
 		
 		mp4tomp3(str(mp4_file_path),"audio.mp3")
 
