@@ -11,8 +11,12 @@ import base64
 import os
 import json
 
+model_size = st.selectbox(
+    'Which model would you like to use?',
+    ("tiny", "base", "small", "medium", "large"))
+
 # Load whisper model
-model = whisper.load_model("large")
+model = whisper.load_model(model_size)
 
 # Define functions
 def whisper_to_text(file_path):
