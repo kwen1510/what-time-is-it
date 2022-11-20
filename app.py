@@ -27,11 +27,10 @@ if uploaded_mp4_file is not None:
 	with open(mp4_file_path, 'wb') as binary_file:
 		video_bytes = uploaded_mp4_file.getvalue()
 		binary_file.write(video_bytes)
+		
+		st.write(mp4_file_path)
 
-	with open(mp4_file_path, "rb") as file:
-		download_video_bytes = file.read() # read a byte (a single character in text)
-		# print(download_video_bytes)
-		transcription = model.transcribe(audio=mp4_file_path, language = 'en')
-	
-		st.write(transcription['text'])	
-		st.write("Done with transcription!")
+	transcription = model.transcribe(audio=mp4_file_path, language = 'en')
+
+	st.write(transcription['text'])	
+	st.write("Done with transcription!")
