@@ -19,7 +19,6 @@ print("hello world")
 
 # When mp4 file uploaded
 if uploaded_mp4_file is not None:
-	uploaded_mp4_file_length = len(uploaded_mp4_file.getvalue())
 
 	filename = pathlib.Path(uploaded_mp4_file.name).stem
 	
