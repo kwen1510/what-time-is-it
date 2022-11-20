@@ -12,7 +12,7 @@ import os
 import json
 
 # Load whisper model
-model = whisper.load_model("base")
+model = whisper.load_model("large")
 
 # Define functions
 def whisper_to_text(file_path):
@@ -166,7 +166,7 @@ with st.form("my_form"):
 			st.write(segments_array)
 			st.write("")
 
-			transcribed_json[mp3_path[:-4]] = segments_array
+			transcribed_json[mp3_path.split('/')[-1][:-4]] = segments_array
 
 		with open('transcribed.json', 'w', encoding ='utf8') as json_file:
 			json.dump(transcribed_json, json_file, ensure_ascii = False)
