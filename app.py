@@ -13,9 +13,7 @@ st.title("What Time is it?")
 
 uploaded_mp4_file = st.file_uploader("Upload Video File", accept_multiple_files=False)
 
-model_size = 'tiny'
-
-model = whisper.load_model(model_size)
+model = whisper.load_model("base")
 
 print("hello world")
 
