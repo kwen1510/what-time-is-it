@@ -3,3 +3,5 @@ ffmpeg-python
 pytube
 requests
 moviepy
+pytube
+tqdm
