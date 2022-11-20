@@ -1,6 +1,11 @@
 import streamlit as st
-
+import pathlib
+from pathlib import Path
 import whisper
+
+HERE = Path(__file__).parent
+print(HERE)
+
 
 st.title("What Time is it?")
 
@@ -16,5 +21,5 @@ if uploaded_file is not None:
 	file_name = uploaded_file.name
 	print(file_name)
 	print("Transcribing...")
-	transcription = model.transcribe(f"./{file_name}", language = 'en')
+	transcription = model.transcribe(f"{HERE}/{file_name}", language = 'en')
 	print("Done with transcription!")
