@@ -163,7 +163,7 @@ with st.form("my_form"):
 		for mp3_path in video_path_array:
 			st.write(f"Extracting from < {mp3_path.split('/')[-1]} >")
 			segments_array = whisper_to_text(mp3_path)
-			st.write(outputs)
+			st.write(segments_array)
 			st.write("")
 
 			transcribed_json[mp3_path[:-4]] = segments_array
