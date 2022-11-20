@@ -1,4 +1,5 @@
 git+https://github.com/openai/whisper.git
 ffmpeg-python
-pytube==12.1.0
-requests==2.28.1
+pytube
+requests
+moviepy
