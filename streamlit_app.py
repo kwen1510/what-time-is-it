@@ -12,6 +12,65 @@ import base64
 # Load whisper model
 model = whisper.load_model("base")
 
+# Define functions
+def whisper_to_text(file_path):
+	transcribe = model.transcribe(audio=file_path, language='en')
+	segments_array = clean_transcription(transcribe)
+	return segments_array
+
+def clean_transcription(transcribe):
+  """
+  YouTube ending: ?t=132
+  All the end of the sentence are full stops. But it also includes question marks
+  This function merges sentences and timestamps
+  """
+
+  # Round timing to no dp, round down
+  prev_sen_ended = True
+  temp_string = ''
+  temp_array = []
+
+  # Empty array to keep timing and text
+  segments_array = []
+
+  for segment in transcribe['segments']:
+    # print("Start:", math.floor(segment['start']))
+    # print("End:", math.floor(segment['end']))
+    # print("Text:", segment['text'])
+    # print("Last text", segment['text'][-1])
+
+    # If the segment does not end with full stop, push timing into temp_array, and update temp_string with text
+    if segment['text'][-1] != '.':
+
+      # Only key in timing if prev sentence has ended
+      if prev_sen_ended == True:
+        temp_array.append(math.floor(segment['start']))
+      
+      temp_string += segment['text']
+
+      prev_sen_ended = False
+
+    # If the segment ends with a full stop, ignore timing, and append temp_string with space + text
+    # Push to segments_array
+    # reset temp array and temp_string
+    else:
+      if prev_sen_ended == True:
+        temp_array.append(math.floor(segment['start']))
+
+
+      temp_string += segment['text']
+      temp_array.append(temp_string.strip())
+      segments_array.append(temp_array)
+      
+      # Reset temp string and array
+      temp_string = ""
+      temp_array = []
+
+      # Inform that prev sentence ended
+      prev_sen_ended = True
+
+  return segments_array
+
 # Streamlit stuff goes here
 st.title("What time is it?")
 
@@ -91,7 +150,7 @@ with st.form("my_form"):
 		st.write("All mp3 files extracted")
 
 		for mp3_path in video_path_array:
-			st.write(f"Extracting from {mp3_path.split('/')[-1]}")
-			transcription = model.transcribe(mp3_path, language = 'en')
-			st.write(transcription['text'])
+			st.write(f"Extracting from <{mp3_path.split('/')[-1]}>")
+			outputs = whisper_to_text(mp3_path)
+			st.write(outputs)
 			st.write("")
