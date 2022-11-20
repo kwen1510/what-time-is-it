@@ -23,7 +23,7 @@ if uploaded_file is not None:
 	print("Transcribing...")
 	
 	video_file = open(f"{HERE}/{file_name}", "wb")
-    	video_file.write(uploaded_file.tobytes())
+	video_file.write(uploaded_file.tobytes())
 	
 	transcription = model.transcribe(f"{HERE}/{file_name}", language = 'en')
 	print("Done with transcription!")
