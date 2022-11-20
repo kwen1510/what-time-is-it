@@ -14,6 +14,7 @@ HERE = Path(__file__).parent
 
 # Functions
 
+# Convert mp4 to mp3 for faster conversion using Whisper
 def mp4tomp3(mp4file, mp3file):
 	videoclip=VideoFileClip(mp4file)
 	audioclip=videoclip.audio
@@ -52,7 +53,7 @@ if uploaded_mp4_file is not None:
 		
 		mp4tomp3(mp4_file_path,"audio.mp3")
 
-# 	transcription = model.transcribe(mp4_file_path, language = 'en')
+	transcription = model.transcribe("audio.mp3", language = 'en')
 
 # 	st.write(transcription['text'])	
 # 	st.write("Done with transcription!")
