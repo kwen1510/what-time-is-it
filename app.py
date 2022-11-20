@@ -19,18 +19,23 @@ print("hello world")
 
 # When mp4 file uploaded
 if uploaded_mp4_file is not None:
+	with NamedTemporaryFile(suffix="wav") as temp:
+		temp.write(audio.getvalue())
+		temp.seek(0)
+		result = model.transcribe(temp.name)
+		st.write(result["text"])
 
-	filename = pathlib.Path(uploaded_mp4_file.name).stem
+# 	filename = pathlib.Path(uploaded_mp4_file.name).stem
 	
-	mp4_file_path = HERE / f'./{filename}_binaries.mp4'
+# 	mp4_file_path = HERE / f'./{filename}_binaries.mp4'
 
-	with open(mp4_file_path, 'wb') as binary_file:
-		video_bytes = uploaded_mp4_file.getvalue()
-		binary_file.write(video_bytes)
+# 	with open(mp4_file_path, 'wb') as binary_file:
+# 		video_bytes = uploaded_mp4_file.getvalue()
+# 		binary_file.write(video_bytes)
 		
-		st.write(mp4_file_path)
+# 		st.write(mp4_file_path)
 
-	transcription = model.transcribe(mp4_file_path, language = 'en')
+# 	transcription = model.transcribe(mp4_file_path, language = 'en')
 
-	st.write(transcription['text'])	
-	st.write("Done with transcription!")
+# 	st.write(transcription['text'])	
+# 	st.write("Done with transcription!")
