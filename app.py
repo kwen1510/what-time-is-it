@@ -19,7 +19,7 @@ print("hello world")
 
 # When mp4 file uploaded
 if uploaded_mp4_file is not None:
-	with NamedTemporaryFile(suffix="wav") as temp:
+	with NamedTemporaryFile(suffix="mp4") as temp:
 		temp.write(audio.getvalue())
 		temp.seek(0)
 		result = model.transcribe(temp.name)
