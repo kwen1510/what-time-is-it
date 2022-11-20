@@ -91,7 +91,7 @@ with st.form("my_form"):
 		st.write("All mp3 files extracted")
 
 		for mp3_path in video_path_array:
-			st.write(f"Extracting from {mp3_path.split("/")[-1]}")
+			st.write(f"Extracting from {mp3_path.split('/')[-1]}")
 			transcription = model.transcribe(mp3_path, language = 'en')
 			st.write(transcription['text'])
 			st.write("")
