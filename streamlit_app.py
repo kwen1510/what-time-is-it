@@ -87,5 +87,5 @@ with st.form("my_form"):
 
 		    st.write("All mp3 files extracted")
 
-		    transcription = model.transcribe("fv3G8iY6e3c.mp3", language = 'en')
+		    transcription = model.transcribe("./mp3/fv3G8iY6e3c.mp3", language = 'en')
 
